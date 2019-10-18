@@ -1,0 +1,4 @@
+install node js
+restart system
+npm install -g "@angular/cli" --install angular
+npm install --restore packages
