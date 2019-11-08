@@ -2,3 +2,7 @@ install node js
 restart system
 npm install -g "@angular/cli" --install angular
 npm install --restore packages
+//generating service
+ng generate service employee 
+//generating component
+ng generate component employee

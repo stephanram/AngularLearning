@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-test',
@@ -30,11 +30,40 @@ import { Component, OnInit } from '@angular/core';
               <button (click) = "greeting = 'Hello'" >Event2</button>
               {{greeting}}
               <br/>
-  */
-  template: ` <br/>
+              <br/>
               //Template Reference
               <input #myInput type="text">
               <button (click) = "logMessage(myInput.value)">Log</button>
+              <br/>
+              //Two way binding Model
+              <input [(ngModel)] = "name" type="text">
+              {{name}}
+              <br/>
+              <div *ngIf = "displayName; then thenBlock; else elseBlock"></div>
+
+              //ngIf directive
+              <ng-template #thenBlock>
+                <h2>Display Name </h2>
+              </ng-template>
+              <ng-template #elseBlock>
+                <h2>Hidden Name </h2>
+              </ng-template>
+              <br/>
+              <div [ngSwitch]="color">
+                <div *ngSwitchCase = "'red'">Red Color</div>
+                <div *ngSwitchCase = "'blue'">Blue Color</div>
+                <div *ngSwitchCase = "'green'">Green Color</div>
+                <div *ngSwitchDefault>Pick Again</div>
+              </div>
+              //ng For
+              <br/>
+              <div *ngFor = "let color of colorList; index as i">
+                <h4 [style.color] = "color">{{i}}</h4>
+              </div>
+  */
+  template: ` <br/>
+              <h4> {{parentData}} </h4>
+              <button (click) = "sendMessage($event)" >click</button>
             `,
   styles: [`
     p {
@@ -64,9 +93,14 @@ export class TestComponent implements OnInit {
   applyStyleBinding: boolean;
   styleClass: any;
   greeting: string;
+  displayName: boolean;
+  color: string;
+  colorList: Array<string>;
+  @Input() parentData: string;
+  @Output() childEvent: EventEmitter<any>;
 
   constructor() {
-    this.name = 'Stephan';
+    this.name = '';
     this.isDiabled = true;
 
     this.cssSuccess = 'text-success';
@@ -89,6 +123,14 @@ export class TestComponent implements OnInit {
       fontStyle : 'italic',
     };
 
+    this.displayName = false;
+
+    this.color = 'qweer';
+
+    this.colorList = ['red', 'blue', 'green'];
+
+    this.childEvent = new EventEmitter();
+
   }
 
   WelcomeUser = (e: any): void => {
@@ -101,6 +143,11 @@ export class TestComponent implements OnInit {
 
   logMessage = (message: string): void => {
     console.log(message);
+  }
+
+  sendMessage = (event): void => {
+    console.log('sendMessage');
+    this.childEvent.emit('Hei, Stephan');
   }
 
   ngOnInit() {

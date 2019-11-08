@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Evolution';
+
+  public name: string;
+  public message: string;
+
+  constructor() {
+    this.name = 'Code evolution';
+  }
 }
