@@ -1,0 +1,82 @@
+<mat-card>
+    <button mat-button>Home</button>
+    <button mat-button [matMenuTriggerFor]="dashboardSubMenu">
+        <span>Dashboard</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button><span>Reports</span></button>
+    <button mat-button [matMenuTriggerFor]="businessProcessSubMenu">
+        <span>Business Process</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="stratPlanProcessSubMenu">
+        <span>Strat Plan Process</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="financeCenterSubMenu">
+        <span>Finance Center</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="noviEntrySubMenu">
+        <span>Novi Entry</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="adminSubMenu">
+        <span>Admin</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <!--Dashboard Sub Menu-->
+    <mat-menu #dashboardSubMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Your Key Metrics Dashboard</button>
+        <button mat-menu-item>Dashboard Configuration</button>
+    </mat-menu>
+
+    <!--Business Process Sub Menu-->
+    <mat-menu #businessProcessSubMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Program Key Dates</button>
+        <button mat-menu-item>Start Distribution - Budget</button>
+        <button mat-menu-item>Start Management</button>
+        <button mat-menu-item>Returning - Inputs - Budget</button>
+        <button mat-menu-item>Returning - Cohert Management</button>
+        <button mat-menu-item>Returning - Term Management</button>
+        <button mat-menu-item>Term Summary</button>
+        <button mat-menu-item>Revenue Management</button>
+        <button mat-menu-item>Scenario Modeling</button>
+    </mat-menu>
+
+    <!--Strat Plan Process-->
+    <mat-menu #stratPlanProcessSubMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Start Management - Strat Plan</button>
+        <button mat-menu-item>Revenue Management - Strat Plan</button>
+        <button mat-menu-item>Average Credits - Strat Plan</button>
+        <button mat-menu-item>Scenario Modeling - Strat Plan</button>
+        <button mat-menu-item>Summary - Strat Plan</button>
+    </mat-menu>
+
+    <!--Finance Center Sub Menu-->
+    <mat-menu #financeCenterSubMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Manage Term Status</button>
+    </mat-menu>
+
+    <!--Novi Entry Sub Menu-->
+    <mat-menu #noviEntrySubMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Manage Novi Starts</button>
+        <button mat-menu-item>Manage Novi Returning</button>
+        <button mat-menu-item>Manage Novi Avg Credits</button>
+    </mat-menu>
+
+    <!--Admin Sub Menu-->
+    <mat-menu #adminSubMenu="matMenu" xPosition="after">
+        <button mat-menu-item>User</button>
+        <button mat-menu-item>Manage System Locks</button>
+        <button mat-menu-item>Notification/Alerts</button>
+        <button mat-menu-item>Content Link Configuration</button>
+        <button mat-menu-item>Version Scheduling</button>
+        <button mat-menu-item>Forecast Automation</button>
+        <button mat-menu-item>Start Management Configuration</button>
+        <button mat-menu-item>Novi Data Entry Configuration</button>
+    </mat-menu>
+
+
+</mat-card>
