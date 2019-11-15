@@ -1,6 +1,22 @@
+.div-filter-margin {
+    margin: 20px;  
+    box-shadow: 1px 1px 6px 1px #dfdfdf;
+    height: 200px;
+}
+
 .mat-toolbar.mat-primary {
     background: #334b63;
     color: #fff;
+}
+
+.filter-title{
+    font-size: 14px;
+    color:#fff;
+}
+
+.filter-help-icon {
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 /** No CSS for this example */
@@ -9,8 +25,3 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
-
-.right-margin-space {
-    margin-right: 10px;
-}
-
