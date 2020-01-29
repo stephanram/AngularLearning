@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-test',
   /*
-    <p>
+              <p>
                 {{5+5}} works!
               </p>
               <p>

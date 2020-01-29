@@ -1,0 +1,9 @@
+<h1>{{ addressInfo.firstName }}</h1>
+<h1>{{ addressInfo.lastName }}</h1>
+<h1>{{ addressInfo.email }}</h1>
+<div *ngIf="addressInfo.phone.length > 0">
+    <p *ngFor="let item of addressInfo.phone">{{ item }}</p>
+</div>
+
+
+

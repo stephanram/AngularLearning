@@ -3,14 +3,14 @@
     color: #fff;
 }
 
-/** No CSS for this example */
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-  }
-
-.right-margin-space {
-    margin-right: 10px;
+.chat-icon {
+    margin: auto;
 }
 
+.welcome-text {
+    font-size: 10px;
+}
+
+.welcome-text-user {
+    font-size: 10px;
+}

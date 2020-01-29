@@ -12,7 +12,6 @@ import {MatIconModule} from '@angular/material/icon';
 import { TopBannerComponent } from './top-banner/top-banner.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -29,8 +28,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule,
-    FlexLayoutModule
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
