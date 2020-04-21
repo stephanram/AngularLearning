@@ -1,0 +1,27 @@
+.header {
+    width: 80%;
+    margin-left: 5%;
+    border: 2px solid red;
+}
+
+.figure {
+    width: 25%;
+    float: left;
+    border: 2px solid red;
+}
+
+.article {
+    width: 50%;
+    margin-left: 30%;
+    padding: 5%;
+    border: 2px solid red;
+}
+
+.article h1 {
+    color: blue;
+}
+
+.figure img {
+    width: 200px;
+    height: 200px;
+}
