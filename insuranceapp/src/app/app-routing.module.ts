@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ChildrenOutletContexts } from '@angular/router';
 import { MenuComponent } from './menu/menu/menu.component';
 import { ClaimComponent } from './claim/claim.component';
-import { CreateComponent } from './claim/create/create.component';
-import { EditComponent } from './claim/edit/edit.component';
-import { ViewComponent } from './claim/view/view.component';
 import { PolicyComponent } from './policy/policy.component';
 import { RenewComponent } from './policy/renew/renew.component';
 import { ViewstatusComponent } from './policy/viewstatus/viewstatus.component';
@@ -23,20 +20,7 @@ const routes: Routes = [
       {
         path: 'claim',
         component: ClaimComponent,
-        children: [
-          {
-            path: 'create',
-            component: CreateComponent
-          },
-          {
-            path: 'edit',
-            component: EditComponent
-          },
-          {
-            path: 'view',
-            component: ViewComponent
-          }
-        ]
+        loadChildren: () => import('./claim/claim.module').then(m => m.ClaimModule)
       },
       {
         path: 'policy',
