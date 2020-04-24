@@ -8,7 +8,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon'
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatNativeDateModule,
     MatRadioModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ],
   exports: [
     MatFormFieldModule,
@@ -32,7 +33,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatNativeDateModule,
     MatRadioModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMatControlModule { }

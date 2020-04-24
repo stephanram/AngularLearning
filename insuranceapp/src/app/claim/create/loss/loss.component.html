@@ -1,14 +1,83 @@
 <form>
     <fieldset>
         <legend>Loss Details</legend>
-        <mat-form-field>
-            <mat-placeholder>
-                <mat-icon>
+        <div class="row">
+            <div class="col-md-5 ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Loss Date -->
+                        <mat-form-field>
+                            <mat-placeholder>
+                                <mat-icon>
+                                </mat-icon>
+                                Claim Date
+                            </mat-placeholder>
+                            <input type="date" matInput [formControl]="lostDate">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Loss Time -->
+                        <mat-form-field>
+                            <mat-placeholder>
+                                <mat-icon>
+                                </mat-icon>
+                                Time
+                            </mat-placeholder>
+                            <input type="time" matInput [formControl]="lostTime">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Lost Place -->
+                        <mat-form-field>
+                            <mat-placeholder>
+                                <mat-icon>
+                                </mat-icon>
+                                Lost Place
+                            </mat-placeholder>
+                            <input type="text" matInput [formControl]="lostPlace">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Drive Reason -->
+                        <mat-form-field>
+                            <mat-placeholder>
+                                <mat-icon>
+                                </mat-icon>
+                                Drive Reason
+                            </mat-placeholder>
+                            <input type="text" matInput [formControl]="driveReason">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 ">
+                <div class="row">
+                    <div class="col">
+                        <!-- Is Reported to Police -->
+                        <mat-checkbox [formControl]="isReportedToPolice">Is Reported to Police</mat-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- FIR Number -->
+                        <mat-form-field *ngIf="lossForm.controls.isReportedToPolice.value == true">
+                            <mat-placeholder>
+                                <mat-icon>
+                                </mat-icon>
+                                FIR Number
+                            </mat-placeholder>
+                            <input type="text" matInput [formControl]="firNumber">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                </mat-icon>
-                Claim Date
-            </mat-placeholder>
-            <input type="date" matInput [formControl] = "lostDate">
-        </mat-form-field>
+
+
     </fieldset>
 </form>

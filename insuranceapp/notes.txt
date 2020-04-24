@@ -6,8 +6,14 @@ netlify init
 netlify deploy --prod --dir
 
 --WireFrame
+https://app.moqups.com/k7ZwjQCioa/view/page/ac8e2aec8
 https://app.moqups.com/zDVJcXRa77/view/page/a148ae9f1
+
 
 --iis
 ng build --To get Prod build.  Build will be generated in dist folder
 copy your application in C:\inetpub\wwwroot folder
+
+--To kill process
+netstat -a -n -o | findStr "4200"
+taskkill -f /pid 11128
