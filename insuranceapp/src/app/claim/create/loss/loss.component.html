@@ -1,83 +1,322 @@
-<form>
-    <fieldset>
-        <legend>Loss Details</legend>
-        <div class="row">
-            <div class="col-md-5 ">
+<form [formGroup]="lossForm" (submit)="onSubmit()">
+    <div class="row">
+        <div class="col">
+            <fieldset>
+                <legend>Loss Details</legend>
                 <div class="row">
-                    <div class="col-md-6">
-                        <!-- Loss Date -->
-                        <mat-form-field>
-                            <mat-placeholder>
-                                <mat-icon>
-                                </mat-icon>
-                                Claim Date
-                            </mat-placeholder>
-                            <input type="date" matInput [formControl]="lostDate">
-                        </mat-form-field>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Loss Date -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Claim Date
+                                    </mat-placeholder>
+                                    <input type="date" matInput [formControl]="lostDate">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Loss Time -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Time
+                                    </mat-placeholder>
+                                    <input type="time" matInput [formControl]="lostTime">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Lost Place -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Lost Place
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="lostPlace">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Drive Reason -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Drive Reason
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="driveReason">
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <!-- Loss Time -->
-                        <mat-form-field>
-                            <mat-placeholder>
-                                <mat-icon>
-                                </mat-icon>
-                                Time
-                            </mat-placeholder>
-                            <input type="time" matInput [formControl]="lostTime">
-                        </mat-form-field>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Is Reported to Police -->
+                                <mat-checkbox [formControl]="isReportedToPolice">Is Reported to Police</mat-checkbox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- FIR Number -->
+                                <mat-form-field *ngIf="isReportedToPolice.value == true">
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        FIR Number
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="firNumber">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Vehicle Speed -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Speed
+                                    </mat-placeholder>
+                                    <input type="number" matInput [formControl]="vehicleSpeed">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Vehicle Location -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Vehicle Location
+                                    </mat-placeholder>
+                                    <mat-select (selectionChange)=getSelectedCountry($event)
+                                        [formControl]="vehicleLocation">
+                                        <mat-option *ngFor="let country of countryList" [value]="country.name">
+                                            {{country.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col">
+                                <!-- People Count -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        No of people Travelled
+                                    </mat-placeholder>
+                                    <input type="number" matInput [formControl]="peopleCount">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Name of the Police station -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Police station
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="policeStation">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="file" (change)="onFileChanged($event)" [formControl]="accidentStatement" />
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Driver Details</legend>
                 <div class="row">
-                    <div class="col">
-                        <!-- Lost Place -->
-                        <mat-form-field>
-                            <mat-placeholder>
-                                <mat-icon>
-                                </mat-icon>
-                                Lost Place
-                            </mat-placeholder>
-                            <input type="text" matInput [formControl]="lostPlace">
-                        </mat-form-field>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Driver name -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Name
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="driverName">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Driver Contact Phone -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Contact Phone
+                                    </mat-placeholder>
+                                    <input type="tel" matInput [formControl]="driverContactPhone">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- License -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        License
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="driverLicense">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- License Effective From -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        License Effective From
+                                    </mat-placeholder>
+                                    <input type="date" matInput [formControl]="licenseEffectiveFrom">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- License Effective To -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        License Effective To
+                                    </mat-placeholder>
+                                    <input type="date" matInput [formControl]="licenseEffectiveTo">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Date of Birth -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        DOB
+                                    </mat-placeholder>
+                                    <input type="date" matInput [formControl]="dateOfBirth">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Gender -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Gender
+                                    </mat-placeholder>
+                                    <mat-select (selectionChange)="getSelectedGender($event)" [formControl]="gender">
+                                        <mat-option *ngFor="let item of genderList" [value]="item.value">
+                                            {{item.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Vehicle Type -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Vehicle Type
+                                    </mat-placeholder>
+                                    <mat-select (selectionChange)="getSelectedVehicleType($event)"
+                                        [formControl]="vehicleType">
+                                        <mat-option *ngFor="let item of vehicleTypeList" [value]="item.value">
+                                            {{item.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        License Type
+                                    </mat-placeholder>
+                                    <mat-select (selectionChange)="getSelectedLicenseType($event)"
+                                        [formControl]="licenseType">
+                                        <mat-option *ngFor="let item of licenseTypeList" [value]="item.value">
+                                            {{item.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col">
+                                <!-- Issuing RTO -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        Issuing RTO
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="issuingRTO">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- RelationShip with Insured -->
+                                <mat-form-field>
+                                    <mat-placeholder>
+                                        <mat-icon>
+                                        </mat-icon>
+                                        RelationShip with Insured
+                                    </mat-placeholder>
+                                    <input type="text" matInput [formControl]="insuredRelation">
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <!-- Drive Reason -->
-                        <mat-form-field>
-                            <mat-placeholder>
-                                <mat-icon>
-                                </mat-icon>
-                                Drive Reason
-                            </mat-placeholder>
-                            <input type="text" matInput [formControl]="driveReason">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-7 ">
-                <div class="row">
-                    <div class="col">
-                        <!-- Is Reported to Police -->
-                        <mat-checkbox [formControl]="isReportedToPolice">Is Reported to Police</mat-checkbox>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <!-- FIR Number -->
-                        <mat-form-field *ngIf="lossForm.controls.isReportedToPolice.value == true">
-                            <mat-placeholder>
-                                <mat-icon>
-                                </mat-icon>
-                                FIR Number
-                            </mat-placeholder>
-                            <input type="text" matInput [formControl]="firNumber">
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
+            </fieldset>
         </div>
-
-
-
-    </fieldset>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col">
+            <button mat-stroked-button color="primary" type="reset" [disabled]="!this.lossForm.valid">Reset</button>
+            <button mat-stroked-button color="primary" type="submit" [disabled]="!this.lossForm.valid">Submit</button>
+        </div>
+    </div>
 </form>

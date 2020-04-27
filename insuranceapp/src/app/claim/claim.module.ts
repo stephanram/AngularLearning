@@ -11,6 +11,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { AngularMatControlModule } from '../ui-module/angular-mat-control/angular-mat-control.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { PrimengControlModule } from '../ui-module/primeng-control/primeng-control.module'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     TabMenuModule,
     AngularMatControlModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PrimengControlModule
   ]
 })
 export class ClaimModule { }

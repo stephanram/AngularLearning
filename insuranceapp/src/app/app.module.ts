@@ -16,6 +16,7 @@ import { MyProfileComponent } from './accounts/my-profile/my-profile.component';
 import { LogoutComponent } from './accounts/logout/logout.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,13 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-
+    HttpClientModule,
     AppRoutingModule,
 
     BrowserAnimationsModule,
     MenubarModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
