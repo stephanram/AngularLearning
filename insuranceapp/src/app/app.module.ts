@@ -17,6 +17,9 @@ import { LogoutComponent } from './accounts/logout/logout.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './security/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { AngularMatControlModule } from './ui-module/angular-mat-control/angular-mat-control.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     ViewstatusComponent,
     ViewVehicleComponent,
     MyProfileComponent,
-    LogoutComponent
+    LogoutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
 
     BrowserAnimationsModule,
     MenubarModule,
-
-
+    FormsModule,
+    AngularMatControlModule
   ],
   providers: [],
   bootstrap: [AppComponent]

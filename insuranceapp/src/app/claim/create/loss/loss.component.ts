@@ -1,9 +1,11 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder, Form } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { CountryService } from '../../../services/country.service';
 import { VehicleService } from '../../../services/vehicle.service';
 import { CommonService } from '../../../services/common.service';
-import { LicenseType } from '../../../models/licenseType';
+
+// validators
+import { DateValidator } from '../../../custom-validators/dateValidator';
 
 @Component({
   selector: 'app-loss',
@@ -49,34 +51,14 @@ export class LossComponent implements OnInit {
   issuingRTO: FormControl;
   insuredRelation: FormControl;
 
-  constructor(private formBuilder: FormBuilder,
+  lossFormError: any = {};
+
+  constructor(formBuilder: FormBuilder,
               private countryService: CountryService,
               private vehicleService: VehicleService,
               private commonService: CommonService) {
-    // this.lostDate = new FormControl ('', [Validators.required]);
-    // this.lostTime = new FormControl('', [Validators.required]);
-    // this.lostPlace = new FormControl('', [Validators.required]);
-    // this.driveReason = new FormControl('', [Validators.required]);
-    // this.isReportedToPolice = new FormControl(false, [Validators.required]);
-    // this.vehicleSpeed = new FormControl('', [Validators.required]);
-    // this.firNumber = new FormControl('', []);
-    // this.vehicleLocation = new FormControl('', [Validators.required]);
-    // this.peopleCount = new FormControl('', [Validators.required]);
-    // this.policeStation = new FormControl('', [Validators.required]);
-    // this.accidentStatement = new FormControl('', [Validators.required]);
-    // this.driverName =  new FormControl('', [Validators.required]);
-    // this.driverContactPhone = new FormControl('', [Validators.required]);
-    // this.driverLicense = new FormControl('', [Validators.required]);
-    // this.licenseEffectiveFrom = new FormControl('', [Validators.required]);
-    // this.licenseEffectiveTo = new FormControl('', [Validators.required]);
-    // this.dateOfBirth = new FormControl('', [Validators.required]);
-    // this.gender = new FormControl('', [Validators.required]);
-    // this.vehicleType = new FormControl('', [Validators.required]);
-    // this.licenseType = new FormControl('', [Validators.required]);
-    // this.issuingRTO = new FormControl('', [Validators.required]);
-    // this.insuredRelation = new FormControl('', [Validators.required]);
 
-    this.lostDate = new FormControl ('2020-10-10', [Validators.required]);
+    this.lostDate = new FormControl('', [Validators.required, DateValidator]);
     this.lostTime = new FormControl('12:00', [Validators.required]);
     this.lostPlace = new FormControl('Test', [Validators.required]);
     this.driveReason = new FormControl('Test', [Validators.required]);
@@ -87,7 +69,7 @@ export class LossComponent implements OnInit {
     this.peopleCount = new FormControl('10', [Validators.required]);
     this.policeStation = new FormControl('Test', [Validators.required]);
     this.accidentStatement = new FormControl('', [Validators.required]);
-    this.driverName =  new FormControl('Test', [Validators.required]);
+    this.driverName = new FormControl('Test', [Validators.required]);
     this.driverContactPhone = new FormControl('1234567890', [Validators.required]);
     this.driverLicense = new FormControl('sfsf', [Validators.required]);
     this.licenseEffectiveFrom = new FormControl('2020-10-10', [Validators.required]);
@@ -127,43 +109,50 @@ export class LossComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.countryService.getCountries().subscribe(response => {
-        this.countryList = response;
-    });
 
+    //#region View Data
+    this.countryService.getCountries().subscribe(response => {
+      this.countryList = response;
+    });
     this.genderList = this.commonService.getGender();
     this.vehicleTypeList = this.vehicleService.getVehicleType();
     this.licenseTypeList = this.vehicleService.getLicenseType();
+    //#endregion
+
+    //#region Control Validation subscribe
+    this.lostDate.statusChanges.subscribe((status) => this.lossDateErrorHandler(status));
+    //#region
   }
 
-  getSelectedCountry($event) {
-    this.selectedCountry = $event.value;
-  }
-
-  getSelectedGender($event) {
-    this.selectedGender = $event.value;
-  }
-
-  getSelectedVehicleType($event) {
-    this.selectedVehicleType = $event.value;
-  }
-
-  getSelectedLicenseType($event) {
-    this.selectedLicenseType = $event.value;
-  }
-
+  //#region Events
   onFileChanged($event) {
-    // this.uploadedFile = $event.target.Files[0];
-    // const fileReader = new FileReader();
-    // fileReader.onload =  (event) => {
-    //   console.log(event.currentTarget);
-    // };
-
+    console.log($event);
   }
 
   onSubmit() {
     console.log('Submitted');
     console.log(this.lossForm.value);
   }
+  //#endregion
+
+  //#region Control Validations
+  lossDateErrorHandler(status: any) {
+    this.lossFormError.lostDate = '';
+    console.log('Event emitted');
+    if (status === 'INVALID') {
+      if ((this.lostDate.touched) && (this.lostDate.errors)) {
+        if (this.lostDate.errors.required) {
+          this.lossFormError.lostDate = 'Lost Date is required';
+        }
+        else if (this.lostDate.errors.dateValidator) {
+          this.lossFormError.lostDate = 'Lost Date is Invalid';
+        }
+      }
+    }
+
+  }
+
+  //#endregion
+
 }
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule, ChildrenOutletContexts } from '@angular/router';
 import { MenuComponent } from './menu/menu/menu.component';
 import { ClaimComponent } from './claim/claim.component';
@@ -10,12 +10,16 @@ import { ViewVehicleComponent } from './vehicle/view-vehicle/view-vehicle.compon
 import { AccountsComponent } from './accounts/accounts.component';
 import { MyProfileComponent } from './accounts/my-profile/my-profile.component';
 import { LogoutComponent } from './accounts/logout/logout.component';
+import { LoginComponent } from './security/login/login.component';
+import { LoginGuard } from './utility/loginGuard';
 
 
 const routes: Routes = [
   {
     path: 'menu',
     component: MenuComponent,
+    canActivate: [LoginGuard],
+    canActivateChild: [LoginGuard],
     children: [
       {
         path: 'claim',
@@ -63,13 +67,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: '',
-    redirectTo: '/menu',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '/menu'
+    redirectTo: '/login'
   }
 ];
 

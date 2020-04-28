@@ -15,6 +15,9 @@
                                         Claim Date
                                     </mat-placeholder>
                                     <input type="date" matInput [formControl]="lostDate">
+                                    <span>touched - {{lostDate.touched}} </span>
+                                    <span>required - {{lostDate.errors.required}} </span>
+                                    <div class="text-danger">{{lossFormError?.lostDate}}</div>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
@@ -98,8 +101,7 @@
                                         </mat-icon>
                                         Vehicle Location
                                     </mat-placeholder>
-                                    <mat-select (selectionChange)=getSelectedCountry($event)
-                                        [formControl]="vehicleLocation">
+                                    <mat-select [formControl]="vehicleLocation">
                                         <mat-option *ngFor="let country of countryList" [value]="country.name">
                                             {{country.name}}
                                         </mat-option>
@@ -236,7 +238,7 @@
                                         </mat-icon>
                                         Gender
                                     </mat-placeholder>
-                                    <mat-select (selectionChange)="getSelectedGender($event)" [formControl]="gender">
+                                    <mat-select [formControl]="gender">
                                         <mat-option *ngFor="let item of genderList" [value]="item.value">
                                             {{item.text}}
                                         </mat-option>
@@ -253,8 +255,7 @@
                                         </mat-icon>
                                         Vehicle Type
                                     </mat-placeholder>
-                                    <mat-select (selectionChange)="getSelectedVehicleType($event)"
-                                        [formControl]="vehicleType">
+                                    <mat-select [formControl]="vehicleType">
                                         <mat-option *ngFor="let item of vehicleTypeList" [value]="item.value">
                                             {{item.text}}
                                         </mat-option>
@@ -270,8 +271,7 @@
                                         </mat-icon>
                                         License Type
                                     </mat-placeholder>
-                                    <mat-select (selectionChange)="getSelectedLicenseType($event)"
-                                        [formControl]="licenseType">
+                                    <mat-select [formControl]="licenseType">
                                         <mat-option *ngFor="let item of licenseTypeList" [value]="item.value">
                                             {{item.text}}
                                         </mat-option>
@@ -315,7 +315,7 @@
     <br><br>
     <div class="row">
         <div class="col">
-            <button mat-stroked-button color="primary" type="reset" [disabled]="!this.lossForm.valid">Reset</button>
+            <button mat-stroked-button color="primary" type="reset">Reset</button>
             <button mat-stroked-button color="primary" type="submit" [disabled]="!this.lossForm.valid">Submit</button>
         </div>
     </div>
